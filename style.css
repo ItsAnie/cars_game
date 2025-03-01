@@ -2,98 +2,101 @@
     margin:0;
     padding: 0;
 }
+
 body {
-    height: 100vh; /* Էկրանի ամբողջ բարձրությունը */
-    background-image: url("img/img1.jpg"); /* Նկարը՝ էկրանի վրա */
-  
+    height: 100vh; /* Full screen height */
+    background-image: url("img/img1.jpg"); /* Background image on the screen */
 }
-
-
 
 #road{
     position: relative;
-    height: 100vh;
-    width: 40%;
-    margin: auto;
-    background: linear-gradient(to bottom, #222, #111);
-    overflow: hidden;
-    border-left: 5px solid white;
-    border-right: 5px solid white;
+    height: 100vh; /* Road takes up the full screen height */
+    width: 40%; /* Road takes up 40% of the screen width */
+    margin: auto; /* Center the road */
+    background: linear-gradient(to bottom, #222, #111); /* Dark gradient background for the road */
+    overflow: hidden; /* Hides the overflow outside the road */
+    border-left: 5px solid white; /* White border on the left side of the road */
+    border-right: 5px solid white; /* White border on the right side of the road */
 }
+
 #my_car{
     position: absolute;
-    bottom: 20px;
-    right: 30px;
-    width: 100px;
-    z-index: 999;
-    height: 131px;
-    background-image: url("img/c1.png");
-    background-size: cover;
+    bottom: 20px; /* Position the player's car at the bottom of the screen */
+    right: 30px; /* Position the car from the right edge */
+    width: 100px; /* Width of the car */
+    z-index: 999; /* Ensure the car is above other elements */
+    height: 131px; /* Height of the car */
+    background-image: url("img/c1.png"); /* Background image for the player's car */
+    background-size: cover; /* Cover the whole element with the image */
 }
+
 #car-2{
     position: absolute;
-    top:20px;
-    left: 30px;
-    width: 100px;
-    z-index: 999;
-    height: 131px;
-    background-image: url("img/c2.png");
-    background-size: cover;
+    top:20px; /* Position the second enemy car at the top */
+    left: 30px; /* Position the car from the left edge */
+    width: 100px; /* Width of the second enemy car */
+    z-index: 999; /* Ensure the car is above other elements */
+    height: 131px; /* Height of the second enemy car */
+    background-image: url("img/c2.png"); /* Background image for the second enemy car */
+    background-size: cover; /* Cover the whole element with the image */
 }
+
 #car-3{
     position: absolute;
-    top:20px;
-    left: 200px;
-    width: 100px;
-    z-index: 999;
-    height: 131px;
-    background-image: url("img/c3.png");
-    background-size: cover;
+    top:20px; /* Position the third enemy car at the top */
+    left: 200px; /* Position the car from the left edge */
+    width: 100px; /* Width of the third enemy car */
+    z-index: 999; /* Ensure the car is above other elements */
+    height: 131px; /* Height of the third enemy car */
+    background-image: url("img/c3.png"); /* Background image for the third enemy car */
+    background-size: cover; /* Cover the whole element with the image */
 }
+
 #road > section{
     position: absolute;
-    left: 0;
-    right: 0;
-    width: 9px;
-    height: 40px;
-    background: white;
-    margin: auto;
+    left: 0; /* Position sections at the left edge */
+    right: 0; /* Position sections at the right edge */
+    width: 9px; /* Width of each section */
+    height: 40px; /* Height of each section (representing road lines) */
+    background: white; /* White color for the road lines */
+    margin: auto; /* Center the sections horizontally */
 }
 
 .explosion {
     position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: rgba(255, 0, 0, 0.8);
-    border-radius: 50%;
-    animation: explosionEffect 1s ease-out forwards;
+    width: 100px; /* Width of the explosion effect */
+    height: 100px; /* Height of the explosion effect */
+    background-color: rgba(255, 0, 0, 0.8); /* Red color for the explosion with some transparency */
+    border-radius: 50%; /* Make the explosion circular */
+    animation: explosionEffect 1s ease-out forwards; /* Apply the explosion animation */
 }
 
 #restart {
     position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    font-size: 18px;
-    background: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
+    top: 20px; /* Position the restart button at the top */
+    left: 50%; /* Position the button in the center horizontally */
+    transform: translateX(-50%); /* Align the button exactly in the center */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 18px; /* Font size for the button text */
+    background: gray; /* Gray background color for the button */
+    color: white; /* White color for the button text */
+    border: none; /* Remove the default button border */
+    cursor: pointer; /* Change cursor to pointer when hovering */
+    z-index: 1000; /* Ensure the restart button is above other elements */
 }
 
+/* Keyframes for the explosion animation */
 @keyframes explosionEffect {
     0% {
-        transform: scale(0);
-        opacity: 1;
+        transform: scale(0); /* Start with no size */
+        opacity: 1; /* Full opacity at the start */
     }
     50% {
-        transform: scale(3);
-        opacity: 0.5;
+        transform: scale(3); /* Scale the explosion to 3 times its original size */
+        opacity: 0.5; /* Half opacity during the explosion */
     }
     100% {
-        transform: scale(5);
-        opacity: 0;
+        transform: scale(5); /* Scale the explosion to 5 times its original size */
+        opacity: 0; /* Fade the explosion out */
     }
 }
