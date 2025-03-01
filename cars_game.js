@@ -1,17 +1,19 @@
 $(document).ready(function(){
-    drawLines();
-    bindEvents();
+    // Initializing the main functionality
+    drawLines();  // Adds the road lines
+    bindEvents();  // Binds user input events
     var intervalId = setInterval(function(){
-        animateLines();
-        moveCar();
-        check();
-    }, 300)
+        animateLines();  // Animates the lines
+        moveCar();  // Moves the cars
+        check();  // Checks for collisions
+    }, 300)  // Executes every 300 milliseconds
 
-    var carTop2 = 10;
-    var carTop3 = 20;
-    var carLeft2 = 0;
-    var carLeft3 = 0;
+    var carTop2 = 10;  // The top position of the second enemy car
+    var carTop3 = 20;  // The top position of the third enemy car
+    var carLeft2 = 0;  // The left position of the second enemy car
+    var carLeft3 = 0;  // The left position of the third enemy car
 
+    // Function to move cars
     function moveCar(){
         carTop2 += 10;
         carTop3 += 12;
@@ -22,10 +24,12 @@ $(document).ready(function(){
         let topDistance = Math.abs(carTop2 - carTop3);
         let leftDistance = Math.abs(carLeft2 - carLeft3);
 
+        // If the two cars are too close vertically, push the third car down
         if(topDistance < 20){
             carTop3 += 15;
         }
 
+        // If the cars are too close horizontally, move them apart
         if(leftDistance < 20){
             if(carLeft2 > carLeft3){
                 carLeft3 += 10;
@@ -34,6 +38,7 @@ $(document).ready(function(){
             }
         }
 
+        // Reset the position of the cars when they move out of view
         if(carTop2 > 90){
             carTop2 = -20;
             let carLeft2 = parseInt(Math.random() * 80);
@@ -48,6 +53,7 @@ $(document).ready(function(){
     }
 
     var rightCoord = 0;
+    // Functions to move the player's car left and right
     function goRight(){
         rightCoord -= 10;
         if(rightCoord < 5){
@@ -64,16 +70,18 @@ $(document).ready(function(){
         $("#my_car").css("right", rightCoord + "%");
     }
 
+    // Binding key events for moving the car
     function bindEvents(){
         $("body").keydown(function(e){
-            if(e.key == "ArrowRight"){
+            if(e.key == "ArrowRight"){  // Moves the car right
                 goRight();
-            }else if(e.key == "ArrowLeft"){
+            }else if(e.key == "ArrowLeft"){  // Moves the car left
                 goLeft();
             }
         })
     }
 
+    // Draws the road lines
     function drawLines(){
         for(let i = 0; i < 12; i++){
             let sect = $("<section></section>");
@@ -82,6 +90,7 @@ $(document).ready(function(){
         }
     }
 
+    // Removes the last line if it goes off the screen
     function removeLastLine(){
         var t = parseInt($("section").last().css("top"))
         if(t > $("#road").height())
@@ -91,6 +100,7 @@ $(document).ready(function(){
             $("section").first().remove();
     }
 
+    // Prepend a new road line when the current one goes off the screen
     function prependNewLine(){
         let sect = $("<section></section>");
         let t = $("section").first().css("top");
@@ -100,6 +110,7 @@ $(document).ready(function(){
         removeLastLine();
     }
 
+    // Animates the road lines
     function animateLines(){
         $("section").each(function(){
             let t = parseInt($(this).css("top"))
@@ -109,6 +120,7 @@ $(document).ready(function(){
         prependNewLine();
     }
 
+    // Checks for collisions between the player's car and enemy cars
     function check() {
         let c1 = $("#my_car").offset();
         let c2 = $("#car-2").offset();
@@ -129,17 +141,16 @@ $(document).ready(function(){
             $("#score").text("Score: " + score);
         }, 1000);
     
+        // If a collision happens, stop the game
         if (d1 < w1 && d2 < h1 || d3 <w1 && d4 < h1) {
-            // Կանգնեցնել խաղը
-            clearInterval(intervalId); // intervalId-ն պետք է սահմանված լինի setInterval-ի արդյունքում
-            clearInterval(scoreInterval);
-            // Բախման պահի պայթյունի ստեղծում
+            clearInterval(intervalId);  // Stop the main game loop
+            clearInterval(scoreInterval);  // Stop the score update
+            // Create explosions at the collision points
             let explosion1 = $("<div class='explosion'></div>");
             let explosion2 = $("<div class='explosion'></div>");
             let explosion3 = $("<div class='explosion'></div>");
-
     
-            // Պայթյունները տեղադրիր մեքենաների վրա
+            // Position explosions on the cars
             explosion1.css({
                 top: c1.top - 50,
                 left: c1.left - 50
@@ -157,8 +168,7 @@ $(document).ready(function(){
             $("body").append(explosion2);
             $("body").append(explosion3);
 
-    
-            // Անիմացիա մեքենաների տեղաշարժի համար
+            // Animate the cars moving away from the explosion
             $("#my_car").animate({
                 left: c1.left + 50,
                 top: c1.top + 50
@@ -174,20 +184,19 @@ $(document).ready(function(){
                 top: c3.top - 50
             }, 500);
     
-            // Ջնջել պայթյունները կարճ ժամանակ անց
+            // Remove explosions after 1 second
             setTimeout(function() {
                 explosion1.remove();
                 explosion2.remove();
                 explosion3.remove();
 
-                alert("GAME OVER!");
-            }, 1000); // Ջնջել 1 վայրկյան հետո
+                alert("GAME OVER!");  // Show game over message
+            }, 1000);
         }
     }
 
+    // Restart the game when the restart button is clicked
     $("#restart").click(function() {
-        location.reload(); // Կվերաբեռնի էջը
+        location.reload();  // Reload the page to restart the game
     });
-    
-    
 })
