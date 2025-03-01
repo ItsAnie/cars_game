@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta data specifying the character encoding and viewport settings for responsiveness -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cars game</title>
-    
+
+    <!-- Link to the CSS file for styling the game -->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
+    <!-- The road where the game takes place -->
     <div id="road">
+        <!-- The player's car -->
         <div id="my_car"></div>
+
+        <!-- The second opponent car -->
         <div id="car-2"></div>
+
+        <!-- The third opponent car -->
         <div id="car-3"></div>
+
+        <!-- Sections of the road (lane markers) -->
         <section></section>
     </div>
+
+    <!-- The button to restart the game -->
     <button id="restart">Restart Game</button>
 
+    <!-- jQuery library used for handling animations and events in the game -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- JavaScript file containing the game's logic -->
     <script src="cars_game.js"></script>
 </body>
 </html>
